@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+     OMBRA — bacaro milanese · sito one-page
+     ============================================================
+     ISTRUZIONI PER BARBARA — cerca "DA SOSTITUIRE" in questo file:
+     1. Indirizzo, orari, telefono/WhatsApp, Instagram, email
+     2. La "lavagna di oggi": si aggiorna in 30 secondi, vedi la
+        sezione <section id="lavagna"> più sotto
+     3. I prezzi del listino
+     Tutto il resto è pronto.
+     ============================================================ -->
+<title>Ombra — Bacaro a Milano | Vino e cicchetti al banco</title>
+<meta name="description" content="Ombra è un bacaro milanese: ombre di vino, cicchetti e la tavola milanese prima del buffet. Vino al banco e piccola cucina lombarda a Porta Venezia, Milano.">
+<!-- DA SOSTITUIRE: quando il sito va online, verifica che il dominio nei tag qui sotto sia quello vero -->
+<link rel="canonical" href="https://www.ombramilano.it/">
+<meta property="og:title" content="Ombra — un bacaro milanese">
+<meta property="og:description" content="Ombre, cicchetti e la tavola milanese prima del buffet. A Porta Venezia, Milano.">
+<meta property="og:url" content="https://www.ombramilano.it/">
+<meta property="og:image" content="https://www.ombramilano.it/img/hero-bancone.webp">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1152">
+<meta property="og:image:alt" content="Il bancone di Ombra con cicchetti e bicchieri di vino">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23F6F0E3'/><text x='50' y='74' font-size='72' font-family='Georgia,serif' font-weight='bold' fill='%236E1B2E' text-anchor='middle'>O</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,800&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<!-- DA SOSTITUIRE all'apertura: aggiungi "telephone", "streetAddress" (dentro address) e "sameAs" (URL Instagram)
+     con i dati veri, e allinea gli orari qui sotto a quelli reali. Finché mancano, meglio ometterli che pubblicare segnaposto. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarOrPub",
+  "name": "Ombra — Bacaro Milanese",
+  "description": "Bacaro milanese: ombre di vino, cicchetti e cucina lombarda al banco.",
+  "servesCuisine": ["Milanese", "Lombarda"],
+  "priceRange": "€€",
+  "image": "https://www.ombramilano.it/img/hero-bancone.webp",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Milano",
+    "postalCode": "20129",
+    "addressCountry": "IT"
+  },
+  "url": "https://www.ombramilano.it",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "17:30", "closes": "23:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "12:00", "closes": "23:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "21:00"}
+  ]
+}
+</script>
+<style>
+  :root{
+    --crema:#F6F0E3;
+    --crema-scura:#EFE7D6;
+    --bordeaux:#6E1B2E;
+    --bordeaux-scuro:#521320;
+    --ottone:#B08D57;
+    --ottone-testo:#7E5F35;
+    --ardesia:#2B2926;
+    --ardesia-scura:#1E1C1A;
+    --gesso:#F2EEE6;
+    --inchiostro:#2E2419;
+    --inchiostro-tenue:#5C4F3D;
+    --serif-display:'Bodoni Moda',Georgia,serif;
+    --serif-testo:'Crimson Pro',Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{
+    background:var(--crema);
+    color:var(--inchiostro);
+    font-family:var(--serif-testo);
+    font-size:18px;
+    line-height:1.65;
+  }
+  img{max-width:100%;height:auto;display:block}
+  .salta{position:absolute;left:-9999px}
+  .salta:focus{position:fixed;top:8px;left:8px;background:var(--crema);color:var(--bordeaux);padding:12px 18px;z-index:100;text-decoration:none;border:2px solid var(--bordeaux)}
+  a{color:var(--bordeaux)}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:var(--crema);
+    border-bottom:1px solid var(--ottone);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 18px;gap:10px;flex-wrap:wrap;
+  }
+  nav .marchio{font-family:var(--serif-display);font-weight:700;font-size:20px;color:var(--bordeaux);letter-spacing:2px;text-decoration:none}
+  nav .voci{display:flex;gap:16px;flex-wrap:wrap}
+  nav .voci a{font-size:15px;text-decoration:none;color:var(--inchiostro-tenue);letter-spacing:.5px;display:inline-block;padding:12px 4px}
+  nav .voci a:hover{color:var(--bordeaux)}
+  .lingue{display:flex;gap:4px}
+  .lingue button{
+    font-family:var(--serif-testo);font-size:13px;letter-spacing:1px;
+    background:none;border:1px solid transparent;color:var(--inchiostro-tenue);
+    padding:3px 10px;cursor:pointer;border-radius:2px;min-height:44px;min-width:44px;
+  }
+  .lingue button.attiva{border-color:var(--bordeaux);color:var(--bordeaux);font-weight:600}
+
+  /* ---------- hero ---------- */
+  header.hero{text-align:center;padding:64px 20px 30px}
+  .hero .luogo{display:inline-block;font-size:13px;letter-spacing:4px;color:var(--ottone-testo);text-transform:uppercase;margin-bottom:18px}
+  .hero h1{
+    font-family:var(--serif-display);font-weight:800;
+    font-size:clamp(60px,13vw,124px);line-height:.95;
+    color:var(--bordeaux);letter-spacing:.06em;
+    text-shadow:6px 8px 0 rgba(176,141,87,.16),14px 20px 26px rgba(46,36,25,.10);
+    animation:insegna .9s ease-out both;
+  }
+  @keyframes insegna{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .hero h1 #ultima{display:inline-block;transition:opacity .45s ease}
+  .hero h1 #ultima.cambia{opacity:0}
+  .hero .sotto{font-style:italic;font-size:clamp(18px,3vw,24px);color:var(--inchiostro-tenue);margin-top:12px}
+  .filetto{width:56px;height:2px;background:var(--ottone);margin:22px auto}
+  .hero .tagline{font-size:clamp(16px,2.5vw,20px);color:var(--inchiostro-tenue);max-width:430px;margin:0 auto}
+  .stato{
+    display:inline-block;margin-top:24px;
+    border:1px solid var(--bordeaux);color:var(--bordeaux);
+    font-size:13px;letter-spacing:2px;text-transform:uppercase;
+    padding:6px 16px;border-radius:2px;
+  }
+  .cta-riga{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+  .cta{
+    display:inline-block;text-decoration:none;
+    font-size:15px;letter-spacing:1px;
+    padding:13px 26px;border-radius:2px;min-height:44px;
+    font-family:var(--serif-testo);font-weight:600;
+  }
+  .cta.pieno{background:var(--bordeaux);color:var(--crema)}
+  .cta.pieno:hover{background:var(--bordeaux-scuro)}
+  .cta.vuoto{border:1px solid var(--bordeaux);color:var(--bordeaux)}
+  .cta.vuoto:hover{background:var(--crema-scura)}
+
+  .hero-foto{max-width:1040px;margin:44px auto 0;padding:0 20px}
+  .hero-foto .cornice{border:1px solid var(--ottone);padding:8px;background:var(--crema)}
+  .hero-foto img{width:100%;height:auto}
+  .hero-foto figcaption{font-size:14px;font-style:italic;color:var(--inchiostro-tenue);text-align:center;margin-top:10px}
+
+  /* ---------- sezioni ---------- */
+  section{max-width:760px;margin:0 auto;padding:64px 20px}
+  .titolo-sezione{text-align:center;margin-bottom:36px}
+  .titolo-sezione .occhiello{font-size:13px;letter-spacing:4px;color:var(--ottone-testo);text-transform:uppercase}
+  .titolo-sezione h2{font-family:var(--serif-display);font-weight:700;font-size:clamp(30px,5vw,42px);color:var(--bordeaux);margin-top:8px}
+
+  /* manifesto */
+  #manifesto p{margin-bottom:20px}
+  #manifesto > p:first-of-type::first-letter{
+    font-family:var(--serif-display);font-size:56px;color:var(--bordeaux);
+    float:left;line-height:.9;padding-right:8px;
+  }
+  .glossario{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:36px}
+  .glossario .voce{border:1px solid var(--ottone);padding:20px;background:var(--crema)}
+  .glossario h3{font-family:var(--serif-display);font-size:20px;color:var(--bordeaux);margin-bottom:8px}
+  .glossario p{font-size:16px;color:var(--inchiostro-tenue)}
+  .numeri{
+    display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+    margin-top:36px;font-family:var(--serif-display);
+    font-size:17px;color:var(--bordeaux);text-align:center;
+  }
+  .numeri span::after{content:" ·";color:var(--ottone)}
+  .numeri span:last-child::after{content:""}
+
+  /* lavagna — ardesia vera, come al banco */
+  #lavagna .quadro{
+    background:var(--ardesia);color:var(--gesso);
+    padding:36px 30px;border:8px solid var(--ardesia-scura);border-radius:3px;
+    box-shadow:inset 0 0 60px rgba(0,0,0,.25);
+  }
+  #lavagna .data{font-style:italic;font-size:16px;color:var(--ottone);text-align:center;margin-bottom:22px}
+  #lavagna ul{list-style:none}
+  #lavagna li{
+    display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+    padding:7px 0;font-size:18px;border-bottom:1px dotted rgba(246,240,227,.25);
+  }
+  #lavagna li:last-child{border-bottom:none}
+  #lavagna .punti{flex:1;border-bottom:1px dotted rgba(246,240,227,.4);margin:0 4px;transform:translateY(-4px)}
+  #lavagna .gruppo{font-family:var(--serif-display);letter-spacing:2px;font-size:14px;text-transform:uppercase;color:var(--ottone);margin:20px 0 6px}
+  #lavagna .nota-lavagna{font-size:15px;font-style:italic;text-align:center;margin-top:18px;color:var(--crema-scura)}
+
+  /* listino */
+  .listino-gruppo{margin-bottom:40px}
+  .listino-gruppo h3{
+    font-family:var(--serif-display);font-size:22px;color:var(--bordeaux);
+    border-bottom:1px solid var(--ottone);padding-bottom:8px;margin-bottom:16px;
+  }
+  .listino-gruppo h3 small{font-family:var(--serif-testo);font-weight:400;font-size:15px;font-style:italic;color:var(--inchiostro-tenue);letter-spacing:0}
+  .piatto{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:6px 0}
+  .piatto .nome{font-weight:600}
+  .piatto .nome .stella{color:var(--ottone)}
+  .piatto .punti{flex:1;border-bottom:1px dotted var(--ottone);margin:0 6px;transform:translateY(-4px)}
+  .piatto .prezzo{font-family:var(--serif-display);color:var(--bordeaux);white-space:nowrap}
+  .piatto-desc{font-size:15px;font-style:italic;color:var(--inchiostro-tenue);margin:-2px 0 6px;max-width:85%}
+  .nota-listino{font-size:15px;font-style:italic;color:var(--inchiostro-tenue);text-align:center;margin-top:8px}
+
+  /* galleria */
+  .galleria{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;max-width:1040px;margin:0 auto;padding:0 20px}
+  .galleria figure{border:1px solid var(--ottone);padding:6px;background:var(--crema)}
+  .galleria img{width:100%;aspect-ratio:1/1;object-fit:cover}
+
+  /* dove */
+  #dove .griglia{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+  #dove h3{font-family:var(--serif-display);font-size:20px;color:var(--bordeaux);margin-bottom:12px}
+  #dove table{width:100%;border-collapse:collapse;font-size:17px}
+  #dove td,#dove th{padding:5px 0;vertical-align:top;font-weight:400;text-align:left}
+  #dove td:last-child{text-align:right;color:var(--inchiostro-tenue)}
+  .no-prenotazioni{
+    margin-top:36px;text-align:center;border:1px solid var(--ottone);
+    padding:24px;font-style:italic;color:var(--inchiostro-tenue);
+  }
+  .no-prenotazioni strong{color:var(--bordeaux);font-style:normal}
+
+  /* contatti */
+  #contatti{text-align:center}
+  #contatti .canali{display:flex;flex-direction:column;gap:14px;align-items:center;margin-top:10px}
+  #contatti .canali a{font-size:19px;text-decoration:none;min-height:44px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
+  #contatti .canali a:hover{text-decoration:underline}
+  .newsletter{margin-top:36px;font-style:italic;color:var(--inchiostro-tenue)}
+
+  footer{
+    background:var(--bordeaux);color:var(--crema-scura);
+    text-align:center;padding:28px 20px;margin-top:64px;
+    font-style:italic;font-size:15px;
+  }
+  footer .firma{font-style:normal;font-size:13px;letter-spacing:1px;margin-top:10px;color:var(--crema-scura)}
+
+  /* Guide di lavoro per i segnaposto "DA SOSTITUIRE": spente in produzione.
+     Per rivederle mentre aggiorni i dati, togli il commento alla riga qui sotto. */
+  /* .segnaposto{outline:2px dashed rgba(110,27,46,.35);outline-offset:2px} */
+  :focus-visible{outline:2px solid var(--bordeaux);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .hero h1{animation:none}
+    .hero h1 #ultima{transition:none}
+  }
+  @media (max-width:600px){
+    html{scroll-padding-top:150px}
+    section{padding:48px 16px}
+    .piatto-desc{max-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<a class="salta" href="#contenuto" data-i18n="salta">Vai al contenuto</a>
+
+<nav>
+  <a class="marchio" href="#top">OMBRA</a>
+  <div class="voci">
+    <a href="#manifesto" data-i18n="nav_manifesto">Manifesto</a>
+    <a href="#lavagna" data-i18n="nav_lavagna">La lavagna</a>
+    <a href="#listino" data-i18n="nav_listino">Listino</a>
+    <a href="#dove" data-i18n="nav_dove">Dove</a>
+    <a href="#contatti" data-i18n="nav_contatti">Contatti</a>
+  </div>
+  <div class="lingue" role="group" aria-label="Lingua">
+    <button type="button" data-lingua="it" class="attiva" aria-pressed="true" aria-label="Italiano">IT</button>
+    <button type="button" data-lingua="en" aria-pressed="false" aria-label="English">EN</button>
+    <button type="button" data-lingua="fr" aria-pressed="false" aria-label="Français">FR</button>
+  </div>
+</nav>
+
+<main id="contenuto">
+
+<header class="hero" id="top">
+  <!-- DA SOSTITUIRE: quartiere definitivo quando c'è il locale -->
+  <p class="luogo segnaposto">Milano · Porta Venezia</p>
+  <h1 aria-label="Ombra">OMBR<span id="ultima" aria-hidden="true">A</span></h1>
+  <p class="sotto" data-i18n="hero_sotto">un bacaro milanese</p>
+  <div class="filetto"></div>
+  <p class="tagline" data-i18n="hero_tagline">ombre, cicchetti e la tavola milanese prima del buffet</p>
+  <p class="stato" data-i18n="hero_stato">Apriamo presto</p>
+  <div class="cta-riga">
+    <a class="cta pieno" href="#lavagna" data-i18n="hero_cta1">Guarda la lavagna</a>
+    <!-- DA SOSTITUIRE: numero WhatsApp reale al posto di 39XXXXXXXXXX -->
+    <a class="cta vuoto segnaposto" href="https://wa.me/39XXXXXXXXXX?text=Ciao%20Ombra!" data-i18n="hero_cta2">Scrivici su WhatsApp</a>
+  </div>
+  <figure class="hero-foto">
+    <div class="cornice"><img src="img/hero-bancone.webp" alt="Il bancone di Ombra con cicchetti e bicchieri di vino rosso nella luce calda della sera" width="2048" height="1152" fetchpriority="high"></div>
+    <figcaption data-i18n="hero_didascalia">il banco, le ombre, i cicchetti — tutto qui</figcaption>
+  </figure>
+</header>
+
+<section id="manifesto">
+  <div class="titolo-sezione">
+    <p class="occhiello" data-i18n="man_occhiello">il manifesto</p>
+    <h2 data-i18n="man_titolo">Prima del buffet, Milano beveva così</h2>
+  </div>
+  <p data-i18n="man_p1">C'era una Milano che all'ora giusta si fermava al banco: un bicchiere piccolo di vino, due bocconi presi con le dita, quattro chiacchiere in piedi e poi via. È la città che ha inventato l'aperitivo — quella di Campari, dei caffè con l'ottone lucido, dei tram che sferragliano fuori. Poi l'aperitivo è diventato un buffet sotto le luci al neon, e quella Milano si è persa per strada.</p>
+  <p data-i18n="man_p2">Ombra la va a riprendere. Il nome viene dal rito veneziano del bacaro — l'ombra è il bicchiere di vino che si beve al banco — ma la parola, per una coincidenza che sembra un destino, è la stessa in francese: ombre. Metà milanese e metà francese, come chi ha immaginato questo posto.</p>
+  <p data-i18n="man_p3">Non stiamo importando Venezia. Stiamo recuperando Milano: nervetti e mondeghili al posto dei cicchetti in saor, il riso giallo che diventa croccante, i vini di Lombardia e Piemonte serviti in bicchieri piccoli a prezzi onesti. Al banco, in piedi, come una volta.</p>
+
+  <figure style="margin:36px 0 0">
+    <div style="border:1px solid var(--ottone);padding:8px;background:var(--crema)"><img src="img/poster.webp" alt="Illustrazione in stile manifesto anni Trenta: un bancone con bicchieri di vino e cicchetti, nei toni crema e bordeaux" width="1376" height="768" loading="lazy"></div>
+    <figcaption style="font-size:14px;font-style:italic;color:var(--inchiostro-tenue);text-align:center;margin-top:10px" data-i18n="man_poster">Il manifesto, letteralmente.</figcaption>
+  </figure>
+
+  <div class="glossario">
+    <div class="voce">
+      <h3 data-i18n="glo_t1">Cos'è un'ombra?</h3>
+      <p data-i18n="glo_p1">Un bicchiere piccolo di vino, servito al banco a prezzo onesto. A Venezia si dice che i vinai seguissero l'ombra del campanile per tenere il vino al fresco. In francese si scrive quasi uguale: ombre.</p>
+    </div>
+    <div class="voce">
+      <h3 data-i18n="glo_t2">Cos'è un cicchetto?</h3>
+      <p data-i18n="glo_p2">Un assaggio da banco, da mangiare in uno o due morsi accanto al bicchiere. Da noi parla milanese: nervetti, mondeghili, salame Milano, riso giallo croccante.</p>
+    </div>
+  </div>
+
+  <p class="numeri">
+    <span data-i18n="num_1">13 cicchetti</span>
+    <span data-i18n="num_2">4 dolci</span>
+    <span data-i18n="num_3">40 etichette</span>
+    <span data-i18n="num_4">1 bancone</span>
+  </p>
+</section>
+
+<section id="lavagna">
+  <div class="titolo-sezione">
+    <p class="occhiello" data-i18n="lav_occhiello">si cambia ogni giorno</p>
+    <h2 data-i18n="lav_titolo">La lavagna di oggi</h2>
+  </div>
+  <!-- ============================================================
+       DA SOSTITUIRE OGNI GIORNO (30 secondi):
+       cambia solo le righe <li> qui sotto — nome e prezzo.
+       La data si aggiorna da sola.
+       ============================================================ -->
+  <div class="quadro">
+    <p class="data"><span data-i18n="lav_oggi">Oggi,</span> <span id="data-oggi">—</span></p>
+    <h3 class="gruppo" data-i18n="lav_gr1">Dal banco</h3>
+    <ul role="list">
+      <li><span>Nervetti con cipolla e prezzemolo</span><span class="punti"></span><span>4</span></li>
+      <li><span>Mondeghili di brasato</span><span class="punti"></span><span>10</span></li>
+      <li><span>Arancino di riso giallo</span><span class="punti"></span><span>4,50</span></li>
+      <li><span>Riso al salto con ossobuco ★</span><span class="punti"></span><span>15</span></li>
+    </ul>
+    <h3 class="gruppo" data-i18n="lav_gr2">Le ombre della settimana</h3>
+    <ul role="list">
+      <li><span>Bonarda dell'Oltrepò — Barbacarlo e dintorni</span><span class="punti"></span><span>3,50</span></li>
+      <li><span>Riesling dell'Oltrepò Pavese</span><span class="punti"></span><span>3,50</span></li>
+      <li><span>Barbera d'Asti di piccolo produttore</span><span class="punti"></span><span>4</span></li>
+    </ul>
+    <p class="nota-lavagna" data-i18n="lav_nota">La lavagna vera cambia ogni giorno — questa è un'anteprima di come suonerà. Per quella del giorno, seguici su Instagram.</p>
+  </div>
+</section>
+
+<div class="galleria">
+  <figure><img src="img/riso-salto.webp" alt="Riso al salto con ossobuco, il piatto firma di Ombra" width="1100" height="1100" loading="lazy"></figure>
+  <figure><img src="img/mondeghili.webp" alt="Mondeghili, le polpette milanesi, su crema di patate" width="1100" height="1100" loading="lazy"></figure>
+  <figure><img src="img/cicchetti.webp" alt="Cicchetti milanesi assortiti sul bancone di marmo" width="1100" height="1100" loading="lazy"></figure>
+  <figure><img src="img/semifreddo.webp" alt="Semifreddo al panettone con crumble di amaretti" width="1100" height="1100" loading="lazy"></figure>
+  <figure><img src="img/mescita.webp" alt="La mescita: vino rosso versato nel bicchiere al banco" width="1100" height="1467" loading="lazy"></figure>
+  <figure><img src="img/stilllife.webp" alt="Due ombre di vino rosso sul marmo, accanto al gesso della lavagna" width="1100" height="1467" loading="lazy"></figure>
+</div>
+
+<section id="listino">
+  <div class="titolo-sezione">
+    <p class="occhiello" data-i18n="lis_occhiello">prezzi chiari, come al banco</p>
+    <h2 data-i18n="lis_titolo">Listino</h2>
+  </div>
+
+  <div class="listino-gruppo">
+    <h3>Cicchetti classici <small data-i18n="lis_s1">dal banco, 3–6 €</small></h3>
+    <div class="piatto"><span class="nome">Nervetti con cipolla e prezzemolo</span><span class="punti"></span><span class="prezzo">4</span></div>
+    <div class="piatto"><span class="nome">Salame Milano e gorgonzola su segale</span><span class="punti"></span><span class="prezzo">4</span></div>
+    <div class="piatto"><span class="nome">Mostarda di Cremona e taleggio</span><span class="punti"></span><span class="prezzo">4</span></div>
+    <div class="piatto"><span class="nome">Uovo sodo, maionese al prezzemolo e acciuga</span><span class="punti"></span><span class="prezzo">3,50</span></div>
+    <div class="piatto"><span class="nome">Bresaola, rucola e grana</span><span class="punti"></span><span class="prezzo">5</span></div>
+    <div class="piatto"><span class="nome">Mini cotoletta con l'osso</span><span class="punti"></span><span class="prezzo">6</span></div>
+    <div class="piatto"><span class="nome">Arancino di riso giallo</span><span class="punti"></span><span class="prezzo">4,50</span></div>
+    <div class="piatto"><span class="nome">Crocchette di patate e taleggio</span><span class="punti"></span><span class="prezzo">4</span></div>
+  </div>
+
+  <div class="listino-gruppo">
+    <h3>Cicchetti gourmet <small data-i18n="lis_s2">per chi vuole salire, 9–16 €</small></h3>
+    <div class="piatto"><span class="nome">Riso al salto con ossobuco <span class="stella">★</span></span><span class="punti"></span><span class="prezzo">15</span></div>
+    <p class="piatto-desc" data-i18n="lis_d1">riso giallo croccante, ossobuco brasato sfilacciato, gremolada e midollo — il piatto di casa</p>
+    <div class="piatto"><span class="nome">Mondeghili di brasato</span><span class="punti"></span><span class="prezzo">10</span></div>
+    <p class="piatto-desc" data-i18n="lis_d2">le polpette milanesi, fatte come si deve: brasato, crema di patate, una punta di mostarda</p>
+    <div class="piatto"><span class="nome">Culatello di Zibello su crostino caldo</span><span class="punti"></span><span class="prezzo">9</span></div>
+    <div class="piatto"><span class="nome">Uovo, crema di parmigiano e caviale</span><span class="punti"></span><span class="prezzo">11</span></div>
+    <div class="piatto"><span class="nome">Tartare di Fassona, senape antica e nocciole</span><span class="punti"></span><span class="prezzo">12</span></div>
+  </div>
+
+  <div class="listino-gruppo">
+    <h3>Dolci <small data-i18n="lis_s3">piccoli, come tutto qui</small></h3>
+    <div class="piatto"><span class="nome">Sbrisolona</span><span class="punti"></span><span class="prezzo">3</span></div>
+    <div class="piatto"><span class="nome">Amaretti morbidi di Saronno</span><span class="punti"></span><span class="prezzo">3</span></div>
+    <div class="piatto"><span class="nome">Mousse al cioccolato con biscotto</span><span class="punti"></span><span class="prezzo">6</span></div>
+    <div class="piatto"><span class="nome">Semifreddo al panettone, crumble di amaretti <span class="stella">★</span></span><span class="punti"></span><span class="prezzo">7,50</span></div>
+  </div>
+
+  <div class="listino-gruppo">
+    <h3>Da bere <small data-i18n="lis_s4">Lombardia e Piemonte, quasi solo</small></h3>
+    <div class="piatto"><span class="nome" data-i18n="lis_b1">L'ombra della casa</span><span class="punti"></span><span class="prezzo">3</span></div>
+    <div class="piatto"><span class="nome" data-i18n="lis_b2">Calici dalla lavagna</span><span class="punti"></span><span class="prezzo">5–8</span></div>
+    <div class="piatto"><span class="nome" data-i18n="lis_b3">Bottiglie — chiedi al banco</span><span class="punti"></span><span class="prezzo">da 22</span></div>
+  </div>
+
+  <p class="nota-listino segnaposto" data-i18n="lis_nota">Prezzi indicativi in attesa di apertura — ★ i piatti di casa.</p>
+</section>
+
+<section id="dove">
+  <div class="titolo-sezione">
+    <p class="occhiello" data-i18n="dov_occhiello">al banco si arriva a piedi</p>
+    <h2 data-i18n="dov_titolo">Dove &amp; quando</h2>
+  </div>
+  <figure style="margin:0 0 32px">
+    <div style="border:1px solid var(--ottone);padding:8px;background:var(--crema)"><img src="img/interno.webp" alt="L'interno di un bacaro milanese: bancone, bottiglie, lampade calde e lavagna" width="1440" height="810" loading="lazy"></div>
+  </figure>
+  <div class="griglia">
+    <div>
+      <h3 data-i18n="dov_t1">L'indirizzo</h3>
+      <!-- DA SOSTITUIRE: indirizzo reale + link Google Maps -->
+      <p class="segnaposto">Via — , —<br>20129 Milano · Porta Venezia</p>
+      <p style="margin-top:10px"><a href="https://maps.google.com/?q=Porta+Venezia+Milano" data-i18n="dov_maps">Portami lì (Google Maps)</a></p>
+      <p style="margin-top:14px;font-size:16px;color:var(--inchiostro-tenue)" data-i18n="dov_mezzi">Ⓜ Porta Venezia (M1) · tram 9 e 33 · passante Porta Venezia</p>
+    </div>
+    <div>
+      <h3 data-i18n="dov_t2">Gli orari</h3>
+      <!-- DA SOSTITUIRE: orari reali -->
+      <table class="segnaposto">
+        <tr><th scope="row" data-i18n="dov_g1">martedì – venerdì</th><td>17.30 – 23.00</td></tr>
+        <tr><th scope="row" data-i18n="dov_g2">sabato</th><td>12.00 – 23.30</td></tr>
+        <tr><th scope="row" data-i18n="dov_g3">domenica</th><td>12.00 – 21.00</td></tr>
+        <tr><th scope="row" data-i18n="dov_g4">lunedì</th><td data-i18n="dov_chiuso">riposo</td></tr>
+      </table>
+      <p style="margin-top:10px;font-size:16px;font-style:italic;color:var(--inchiostro-tenue)" data-i18n="dov_nota">il banco dei cicchetti apre con noi e chiude quando finiscono</p>
+    </div>
+  </div>
+  <div class="no-prenotazioni">
+    <p><strong data-i18n="dov_np1">Niente prenotazioni.</strong> <span data-i18n="dov_np2">Si beve al banco, come una volta. Per gruppi, eventi o una bottiglia da portare a casa, scrivici su WhatsApp.</span></p>
+  </div>
+</section>
+
+<section id="contatti">
+  <div class="titolo-sezione">
+    <p class="occhiello" data-i18n="con_occhiello">due parole quando vuoi</p>
+    <h2 data-i18n="con_titolo">Contatti</h2>
+  </div>
+  <div class="canali">
+    <!-- DA SOSTITUIRE: numero WhatsApp, profilo Instagram, email reali -->
+    <a class="segnaposto" href="https://wa.me/39XXXXXXXXXX?text=Ciao%20Ombra!">WhatsApp — <span data-i18n="con_wa">scrivici, rispondiamo dal banco</span></a>
+    <a class="segnaposto" href="https://www.instagram.com/">Instagram — @ombra.bacaro</a>
+    <a class="segnaposto" href="mailto:ciao@ombramilano.it">ciao@ombramilano.it</a>
+    <a class="segnaposto" href="mailto:bonjour@ombramilano.it">bonjour@ombramilano.it</a>
+  </div>
+  <p class="newsletter" data-i18n="con_news">Vuoi la lavagna nella tua inbox? Scrivici «lavagna» su WhatsApp e la ricevi ogni settimana.</p>
+</section>
+
+</main>
+
+<footer>
+  <p lang="fr">l'ombra, à Milan comme à Venise</p>
+  <p class="firma" data-i18n="foot_firma">metà milanese, metà francese · OMBRA — bacaro milanese</p>
+</footer>
+
+<script>
+/* ---------- l'insegna respira tra le due lingue: OMBRA ↔ OMBRE ---------- */
+(function(){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var el = document.getElementById('ultima');
+  if(!el) return;
+  setInterval(function(){
+    el.classList.add('cambia');
+    setTimeout(function(){
+      el.textContent = el.textContent === 'A' ? 'E' : 'A';
+      el.classList.remove('cambia');
+    }, 460);
+  }, 5200);
+})();
+
+/* ---------- data della lavagna: sempre oggi ---------- */
+(function(){
+  var mesi = {
+    it:['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'],
+    en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+    fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre']
+  };
+  var giorni = {
+    it:['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'],
+    en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+    fr:['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi']
+  };
+  window.aggiornaData = function(lingua){
+    var d = new Date();
+    var el = document.getElementById('data-oggi');
+    if(!el) return;
+    if(lingua === 'en'){
+      el.textContent = giorni.en[d.getDay()] + ', ' + mesi.en[d.getMonth()] + ' ' + d.getDate();
+    } else {
+      var num = (lingua === 'fr' && d.getDate() === 1) ? '1er' : d.getDate();
+      el.textContent = giorni[lingua][d.getDay()] + ' ' + num + ' ' + mesi[lingua][d.getMonth()];
+    }
+  };
+})();
+
+/* ---------- traduzioni ---------- */
+var i18n = {
+  it: {}, /* l'italiano è già nel markup */
+  en: {
+    salta:'Skip to content',
+    nav_manifesto:'Manifesto', nav_lavagna:'The chalkboard', nav_listino:'Menu', nav_dove:'Find us', nav_contatti:'Contact',
+    hero_sotto:'a Milanese bacaro',
+    hero_tagline:'small glasses of wine, cicchetti, and the Milanese table before the buffet',
+    hero_stato:'Opening soon',
+    hero_cta1:'See the chalkboard', hero_cta2:'Message us on WhatsApp',
+    hero_didascalia:'the counter, the ombre, the cicchetti — that’s all',
+    man_occhiello:'the manifesto', man_titolo:'Before the buffet, this is how Milan drank',
+    man_p1:'There was a Milan that, at the right hour, stopped at the counter: a small glass of wine, a couple of bites eaten with your fingers, a quick chat standing up, then off you went. This is the city that invented the aperitivo — the Milan of Campari, of cafés with polished brass, of trams rattling outside. Then the aperitivo became a buffet under neon lights, and that Milan got lost along the way.',
+    man_p2:'Ombra is going back for it. The name comes from the ritual of the Venetian bacari — the little wine bars where an ombra is the small glass of wine you drink at the counter — but by a coincidence that feels like destiny, the word is the same in French: ombre. Half Milanese, half French, like the person who imagined this place.',
+    man_p3:'We’re not importing Venice. We’re reclaiming Milan: nervetti and mondeghili instead of cicchetti in saor, saffron rice turned golden and crisp, wines from Lombardy and Piedmont served in small glasses at honest prices. At the counter, standing, the way it used to be.',
+    man_poster:'The manifesto — literally.',
+    glo_t1:'What is an ombra?',
+    glo_p1:'A small glass of wine, served at the counter for an honest price. In Venice they say wine sellers followed the shadow — the ombra — of the bell tower to keep their wine cool. In French the word is nearly the same: ombre.',
+    glo_t2:'What is a cicchetto?',
+    glo_p2:'A little bite from the counter, gone in a mouthful or two beside your glass. Here it speaks Milanese: nervetti, mondeghili, Milano salami, crispy saffron rice.',
+    num_1:'13 cicchetti', num_2:'4 desserts', num_3:'40 wines', num_4:'1 counter',
+    lav_occhiello:'it changes every day', lav_titolo:'Today’s chalkboard', lav_oggi:'Today,',
+    lav_gr1:'From the counter', lav_gr2:'This week’s ombre',
+    lav_nota:'The real chalkboard changes every day — this is a taste of how it reads. For today’s, follow us on Instagram.',
+    lis_occhiello:'clear prices, like at the counter', lis_titolo:'Menu',
+    lis_s1:'from the counter, €3–6', lis_s2:'for those who want more, €9–16', lis_s3:'small, like everything here', lis_s4:'Lombardy and Piedmont, little else',
+    lis_d1:'crispy saffron rice, shredded braised ossobuco, gremolada and marrow — the house dish',
+    lis_d2:'Milanese meatballs done properly: braised beef, potato cream, a touch of mostarda',
+    lis_b1:'The house ombra', lis_b2:'Glasses from the chalkboard', lis_b3:'Bottles — ask at the counter',
+    lis_nota:'Provisional prices until we open — ★ marks a house dish.',
+    dov_occhiello:'a counter is somewhere you arrive on foot', dov_titolo:'Where & when',
+    dov_t1:'The address', dov_maps:'Take me there (Google Maps)',
+    dov_mezzi:'Ⓜ Porta Venezia (M1) · trams 9 and 33 · Porta Venezia suburban rail',
+    dov_t2:'Opening hours',
+    dov_g1:'Tuesday – Friday', dov_g2:'Saturday', dov_g3:'Sunday', dov_g4:'Monday', dov_chiuso:'closed',
+    dov_nota:'the cicchetti counter opens with us and closes when they run out',
+    dov_np1:'No reservations.', dov_np2:'You drink at the counter, the old way. For groups, events or a bottle to take home, message us on WhatsApp.',
+    con_occhiello:'a quick word, anytime', con_titolo:'Contact',
+    con_wa:'message us, we reply from the counter',
+    con_news:'Want the chalkboard in your inbox? Message us “lavagna” on WhatsApp and you’ll get it every week.',
+    foot_firma:'half Milanese, half French · OMBRA — Milanese bacaro'
+  },
+  fr: {
+    salta:'Aller au contenu',
+    nav_manifesto:'Manifeste', nav_lavagna:'L’ardoise', nav_listino:'Carte', nav_dove:'Nous trouver', nav_contatti:'Contact',
+    hero_sotto:'un bacaro milanais',
+    hero_tagline:'des ombres de vin, des cicchetti et la table milanaise d’avant le buffet',
+    hero_stato:'Ouverture prochaine',
+    hero_cta1:'Voir l’ardoise', hero_cta2:'Écrivez-nous sur WhatsApp',
+    hero_didascalia:'le comptoir, les ombres, les cicchetti — c’est tout',
+    man_occhiello:'le manifeste', man_titolo:'Avant le buffet, Milan buvait comme ça',
+    man_p1:'Il y avait un Milan qui, quand venait l’heure, s’arrêtait au comptoir : un petit verre de vin, deux bouchées prises avec les doigts, quelques mots debout, puis on repartait. C’est la ville qui a inventé l’aperitivo — celle de Campari, des cafés au laiton poli, des trams qui ferraillent dehors. Puis l’aperitivo est devenu un buffet sous les néons, et ce Milan-là s’est perdu en chemin.',
+    man_p2:'Ombra part le retrouver. Le nom vient du rituel des bacari vénitiens — ces petits bars à vin où l’ombra est le petit verre qu’on boit au comptoir — mais par une coïncidence qui ressemble à un destin, le mot est le même en français : ombre. Moitié milanaise, moitié française, comme celle qui a imaginé ce lieu.',
+    man_p3:'Nous n’importons pas Venise. Nous retrouvons Milan : des nervetti et des mondeghili à la place des cicchetti in saor, le riz au safran devenu croustillant, les vins de Lombardie et du Piémont servis en petits verres à prix honnêtes. Au comptoir, debout, comme autrefois.',
+    man_poster:'Le manifeste, littéralement.',
+    glo_t1:'Qu’est-ce qu’une ombra ?',
+    glo_p1:'Un petit verre de vin, servi au comptoir à prix honnête. À Venise, on raconte que les marchands de vin suivaient l’ombre du campanile pour garder le vin au frais. En français, le mot est presque le même : ombre.',
+    glo_t2:'Qu’est-ce qu’un cicchetto ?',
+    glo_p2:'Une bouchée de comptoir, à manger en une ou deux fois à côté du verre. Chez nous, elle parle milanais : nervetti, mondeghili, salame Milano, riz au safran croustillant.',
+    num_1:'13 cicchetti', num_2:'4 desserts', num_3:'40 références', num_4:'1 comptoir',
+    lav_occhiello:'ça change tous les jours', lav_titolo:'L’ardoise du jour', lav_oggi:'Aujourd’hui,',
+    lav_gr1:'Au comptoir', lav_gr2:'Les ombres de la semaine',
+    lav_nota:'La vraie ardoise change chaque jour — en voici un avant-goût. Pour celle du jour, suivez-nous sur Instagram.',
+    lis_occhiello:'des prix clairs, comme au comptoir', lis_titolo:'Carte',
+    lis_s1:'au comptoir, 3–6 €', lis_s2:'pour monter d’un cran, 9–16 €', lis_s3:'petits, comme tout ici', lis_s4:'Lombardie et Piémont, presque uniquement',
+    lis_d1:'riz au safran croustillant, ossobuco braisé effiloché, gremolada et moelle — le plat de la maison',
+    lis_d2:'les boulettes milanaises faites comme il faut : braisé de bœuf, crème de pommes de terre, une pointe de mostarda',
+    lis_b1:'L’ombra de la maison', lis_b2:'Verres à l’ardoise', lis_b3:'Bouteilles — demandez au comptoir',
+    lis_nota:'Prix indicatifs avant ouverture — ★ les plats de la maison.',
+    dov_occhiello:'un comptoir, ça se rejoint à pied', dov_titolo:'Où & quand',
+    dov_t1:'L’adresse', dov_maps:'M’y emmener (Google Maps)',
+    dov_mezzi:'Ⓜ Porta Venezia (M1) · trams 9 et 33 · gare Porta Venezia',
+    dov_t2:'Les horaires',
+    dov_g1:'mardi – vendredi', dov_g2:'samedi', dov_g3:'dimanche', dov_g4:'lundi', dov_chiuso:'fermé',
+    dov_nota:'le comptoir à cicchetti ouvre avec nous et ferme quand il n’y en a plus',
+    dov_np1:'Pas de réservation.', dov_np2:'On boit au comptoir, comme autrefois. Pour les groupes, les événements ou une bouteille à emporter, écrivez-nous sur WhatsApp.',
+    con_occhiello:'un mot quand vous voulez', con_titolo:'Contact',
+    con_wa:'écrivez-nous, on répond depuis le comptoir',
+    con_news:'L’ardoise dans votre boîte mail ? Envoyez-nous le mot « lavagna » sur WhatsApp et vous la recevrez chaque semaine.',
+    foot_firma:'moitié milanaise, moitié française · OMBRA — bacaro milanais'
+  }
+};
+
+/* salva l'italiano originale dal markup, poi applica la lingua scelta */
+(function(){
+  var elementi = document.querySelectorAll('[data-i18n]');
+  elementi.forEach(function(el){ i18n.it[el.getAttribute('data-i18n')] = el.textContent; });
+
+  function applica(lingua){
+    var dict = i18n[lingua] || i18n.it;
+    elementi.forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(dict[k]) el.textContent = dict[k];
+    });
+    document.documentElement.lang = lingua;
+    document.querySelectorAll('.lingue button').forEach(function(b){
+      var attiva = b.getAttribute('data-lingua') === lingua;
+      b.classList.toggle('attiva', attiva);
+      b.setAttribute('aria-pressed', attiva ? 'true' : 'false');
+    });
+    var gruppoLingue = document.querySelector('.lingue');
+    if(gruppoLingue) gruppoLingue.setAttribute('aria-label', {it:'Lingua', en:'Language', fr:'Langue'}[lingua] || 'Lingua');
+    window.aggiornaData(lingua);
+    try { localStorage.setItem('ombra-lingua', lingua); } catch(e){}
+  }
+
+  document.querySelectorAll('.lingue button').forEach(function(b){
+    b.addEventListener('click', function(){ applica(b.getAttribute('data-lingua')); });
+  });
+
+  var salvata = 'it';
+  try { salvata = localStorage.getItem('ombra-lingua') || 'it'; } catch(e){}
+  if(!i18n[salvata]) salvata = 'it';
+  applica(salvata);
+})();
+</script>
+</body>
+</html>
