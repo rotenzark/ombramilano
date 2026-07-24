@@ -121,9 +121,7 @@
     font-size:clamp(60px,13vw,124px);line-height:.95;
     color:var(--bordeaux);letter-spacing:.06em;
     text-shadow:6px 8px 0 rgba(176,141,87,.16),14px 20px 26px rgba(46,36,25,.10);
-    animation:insegna .9s ease-out both;
   }
-  @keyframes insegna{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   .hero h1 #ultima{display:inline-block;transition:opacity .45s ease}
   .hero h1 #ultima.cambia{opacity:0}
   .hero .sotto{font-style:italic;font-size:clamp(18px,3vw,24px);color:var(--inchiostro-tenue);margin-top:12px}
@@ -281,6 +279,40 @@
       calc(var(--sx,0) * 1.4px) calc(var(--sy,0) * 1.4px) calc(var(--sblur,24) * 1px) rgba(46,36,25,.26);
   }
 
+  /* ---------- splash emblema (marchio animato) ---------- */
+  #emblema{position:fixed;inset:0;z-index:120;background:#17100a;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .55s ease}
+  html.intro-emblema #emblema{opacity:1;visibility:visible}
+  #emblema .marchio{text-align:center;padding:0 20px}
+  #emblema .marchio-calice{width:min(46vw,190px);height:auto;display:block;margin:0 auto;opacity:0;transform:scale(.88) translateY(10px);animation:em-in 1.2s .25s cubic-bezier(.2,.75,.25,1) forwards}
+  #emblema .marchio-nome{font-family:var(--serif-display);font-weight:700;color:var(--gesso);font-size:clamp(42px,11vw,66px);letter-spacing:.14em;margin-top:26px;opacity:0;transform:translateY(14px);animation:em-rise 1s 1.05s ease forwards}
+  #emblema .marchio-pay{font-family:var(--serif-display);color:#C9A24B;font-size:13px;letter-spacing:5px;text-transform:uppercase;margin-top:11px;opacity:0;transform:translateY(14px);animation:em-rise 1s 1.3s ease forwards}
+  @keyframes em-in{to{opacity:1;transform:none}}
+  @keyframes em-rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){#emblema{display:none}}
+
+  /* ---------- intro "si accende la luce" ---------- */
+  #velo,#velo-glow{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:0}
+  #velo{background:radial-gradient(130% 100% at 50% 40%, rgba(38,24,14,.5), rgba(18,12,7,.93))}
+  #velo-glow{background:radial-gradient(42% 32% at 50% 38%, rgba(220,186,126,.42), transparent 70%);transform:scale(.6)}
+  html.intro #velo{opacity:1;animation:velo-out 1.9s ease forwards}
+  html.intro #velo-glow{animation:glow-in 1.9s ease forwards}
+  @keyframes velo-out{0%{opacity:1}50%{opacity:.72}100%{opacity:0}}
+  @keyframes glow-in{0%{opacity:0;transform:scale(.55)}28%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}
+  @keyframes sali{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  html.intro .hero .luogo{opacity:0;animation:sali .7s ease .45s both}
+  html.intro .hero h1{opacity:0;animation:sali .9s ease .6s both}
+  html.intro .hero .sotto{opacity:0;animation:sali .8s ease .8s both}
+  html.intro .hero .filetto{opacity:0;animation:sali .7s ease .95s both}
+  html.intro .hero .tagline{opacity:0;animation:sali .8s ease 1.1s both}
+  html.intro .hero .stato{opacity:0;animation:sali .7s ease 1.25s both}
+  html.intro .hero .cta-riga{opacity:0;animation:sali .7s ease 1.4s both}
+  html.intro .hero-foto{opacity:0;animation:sali .9s ease 1.6s both}
+  @media (prefers-reduced-motion:reduce){
+    #velo,#velo-glow{display:none}
+    html.intro .hero .luogo,html.intro .hero h1,html.intro .hero .sotto,html.intro .hero .filetto,
+    html.intro .hero .tagline,html.intro .hero .stato,html.intro .hero .cta-riga,html.intro .hero-foto{animation:none;opacity:1}
+  }
+
   footer{
     background:var(--bordeaux);color:var(--crema-scura);
     text-align:center;padding:28px 20px;margin-top:64px;
@@ -309,10 +341,28 @@
     nav .voci a{font-size:14px;padding:8px 2px}
   }
 </style>
+<script>
+  /* decide prima del render se riprodurre l'intro: una volta per sessione, mai con "riduci animazioni" */
+  (function(){
+    try{
+      var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!rm){ document.documentElement.classList.add('intro-emblema'); }
+    }catch(e){}
+  })();
+</script>
 </head>
 <body>
 
 <a class="salta" href="#contenuto" data-i18n="salta">Vai al contenuto</a>
+<div id="velo" aria-hidden="true"></div>
+<div id="velo-glow" aria-hidden="true"></div>
+<div id="emblema" aria-hidden="true">
+  <div class="marchio">
+    <img class="marchio-calice" src="img/calice.svg" alt="">
+    <div class="marchio-nome">OMBRA</div>
+    <div class="marchio-pay">un bacaro milanese</div>
+  </div>
+</div>
 
 <nav>
   <a class="marchio" href="#top">OMBRA</a>
@@ -577,12 +627,13 @@
 })();
 
 /* ---------- luce e ombre: il cursore su desktop, un'orbita lenta e automatica su mobile ---------- */
-(function(){
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce) return;
-  var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+window.__startLuce = function(){
   var root = document.documentElement;
+  if(root.__luceOn) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  root.__luceOn = true;
   root.classList.add('luce-attiva');
+  var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   var MAX = 16, cx = 0, cy = 8;
   function paint(){
     root.style.setProperty('--sx', cx.toFixed(2));
@@ -618,6 +669,72 @@
       paint();
     }
     requestAnimationFrame(orbita);
+  }
+};
+
+/* ---------- regia dell'intro: emblema → "si accende la luce" ---------- */
+(function(){
+  var root = document.documentElement;
+  var emblemaEl = document.getElementById('emblema');
+  function avvia(){ if(window.__startLuce) window.__startLuce(); }
+  if(!root.classList.contains('intro-emblema')){ avvia(); return; }
+
+  try{
+    var fatto = false;
+
+    // fase 2: la luce sale e l'ombra lunga dell'insegna si ritrae
+    function luceOn(){
+      root.classList.add('luce-attiva');
+      root.classList.add('intro');
+      root.style.setProperty('--sx','0'); root.style.setProperty('--sy','40'); root.style.setProperty('--sblur','46');
+      var t0 = null, DUR = 1150, DELAY = 300;
+      function ease(x){ return 1 - Math.pow(1 - x, 3); }
+      function frame(now){
+        if(t0 === null) t0 = now;
+        var e = now - t0 - DELAY;
+        if(e >= 0){
+          var p = Math.min(1, e / DUR), k = ease(p);
+          root.style.setProperty('--sy', (40 + (8 - 40) * k).toFixed(2));
+          root.style.setProperty('--sblur', (46 + (24 - 46) * k).toFixed(1));
+          if(p >= 1) return;
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    function pulisci(){
+      root.classList.remove('intro');
+      try{ sessionStorage.setItem('ombra-intro','1'); }catch(e){}
+      avvia();
+    }
+    // passaggio dall'emblema alla luce
+    function handoff(){
+      if(fatto) return; fatto = true;
+      clearTimeout(tEmb);
+      luceOn();
+      if(emblemaEl) emblemaEl.style.opacity = '0';
+      setTimeout(function(){ root.classList.remove('intro-emblema'); if(emblemaEl) emblemaEl.style.display = 'none'; }, 540);
+      setTimeout(pulisci, 2000);
+    }
+    // salta tutto: vai allo stato finale
+    function salta(){
+      if(fatto){ return; } fatto = true;
+      clearTimeout(tEmb);
+      if(emblemaEl){ emblemaEl.style.opacity = '0'; setTimeout(function(){ emblemaEl.style.display = 'none'; }, 300); }
+      root.classList.remove('intro-emblema'); root.classList.remove('intro');
+      try{ sessionStorage.setItem('ombra-intro','1'); }catch(e){}
+      avvia();
+    }
+    var tEmb = setTimeout(handoff, 2300);
+    ['pointerdown','keydown','wheel','touchstart'].forEach(function(ev){
+      window.addEventListener(ev, salta, {once:true, passive:true});
+    });
+    // rete di sicurezza: qualunque cosa vada storta, dopo 9s si sblocca tutto
+    setTimeout(function(){ root.classList.remove('intro-emblema'); if(emblemaEl) emblemaEl.style.display='none'; avvia(); }, 9000);
+  }catch(err){
+    root.classList.remove('intro-emblema'); root.classList.remove('intro');
+    if(emblemaEl) emblemaEl.style.display='none';
+    avvia();
   }
 })();
 
