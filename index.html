@@ -50,6 +50,7 @@
   "image": "https://www.ombramilano.it/img/hero-bancone.webp",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "Via Melzo 12",
     "addressLocality": "Milano",
     "postalCode": "20129",
     "addressCountry": "IT"
@@ -231,6 +232,49 @@
   #contatti .canali a:hover{text-decoration:underline}
   .newsletter{margin-top:36px;font-style:italic;color:var(--inchiostro-tenue)}
 
+  /* badge aperto/chiuso in tempo reale */
+  .stato-orari-wrap{text-align:center;margin:-16px 0 30px;min-height:38px}
+  .badge-orari{display:inline-flex;align-items:center;gap:9px;font-size:15px;letter-spacing:.3px;padding:8px 18px;border-radius:999px;border:1px solid var(--ottone);background:var(--crema)}
+  .badge-orari::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor}
+  .badge-orari.aperto{color:#4a6a1e;border-color:rgba(99,138,34,.5)}
+  .badge-orari.chiuso{color:var(--bordeaux);border-color:rgba(110,27,46,.35)}
+
+  /* mappa */
+  .mappa{margin-top:32px;border:8px solid var(--crema);outline:1px solid var(--ottone);overflow:hidden;background:var(--crema)}
+  .mappa iframe{width:100%;height:360px;border:0;display:block}
+
+  /* carta vini */
+  .vini-intro{font-size:15px;font-style:italic;color:var(--inchiostro-tenue);margin:-6px 0 18px;max-width:92%}
+  .vini-cat{font-family:var(--serif-display);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--ottone-testo);margin:20px 0 6px}
+  .vini-cat:first-of-type{margin-top:4px}
+
+  /* ---------- ombre proiettate dal cursore (elemento firma) ----------
+     Il cursore è una sorgente di luce: --sx/--sy sono l'offset dell'ombra,
+     aggiornati via JS. Base: ombra statica morbida (mobile, reduced-motion). */
+  .hero-foto .cornice,.manifesto-figura,.glossario .voce,.galleria figure,
+  .no-prenotazioni,.interno-cornice,.mappa{box-shadow:0 6px 22px rgba(46,36,25,.10)}
+  #lavagna .quadro{box-shadow:inset 0 0 60px rgba(0,0,0,.25),0 12px 34px rgba(46,36,25,.18)}
+
+  html.luce-attiva .hero-foto .cornice,
+  html.luce-attiva .manifesto-figura,
+  html.luce-attiva .glossario .voce,
+  html.luce-attiva .galleria figure,
+  html.luce-attiva .no-prenotazioni,
+  html.luce-attiva .interno-cornice,
+  html.luce-attiva .mappa,
+  html.luce-attiva .cta.pieno,
+  html.luce-attiva .cta.vuoto{
+    box-shadow:
+      calc(var(--sx,0) * 1px) calc(var(--sy,0) * 1px) calc(var(--sblur,26) * 1px) rgba(46,36,25,.24),
+      calc(var(--sx,0) * .38px) calc(var(--sy,0) * .38px) calc(var(--sblur,26) * .42px) rgba(46,36,25,.13);
+  }
+  html.luce-attiva #lavagna .quadro{
+    box-shadow:
+      inset 0 0 60px rgba(0,0,0,.25),
+      calc(var(--sx,0) * 1.5px) calc(var(--sy,0) * 1.5px) calc(var(--sblur,26) * 1.35px) rgba(46,36,25,.32);
+  }
+  html.luce-attiva .cta{transition:none}
+
   footer{
     background:var(--bordeaux);color:var(--crema-scura);
     text-align:center;padding:28px 20px;margin-top:64px;
@@ -305,7 +349,7 @@
   <p data-i18n="man_p3">Non stiamo importando Venezia. Stiamo recuperando Milano: nervetti e mondeghili al posto dei cicchetti in saor, il riso giallo che diventa croccante, i vini di Lombardia e Piemonte serviti in bicchieri piccoli a prezzi onesti. Al banco, in piedi, come una volta.</p>
 
   <figure style="margin:36px 0 0">
-    <div style="border:1px solid var(--ottone);padding:8px;background:var(--crema)"><img src="img/poster.webp" alt="Illustrazione in stile manifesto anni Trenta: un bancone con bicchieri di vino e cicchetti, nei toni crema e bordeaux" width="1376" height="768" loading="lazy"></div>
+    <div class="manifesto-figura" style="border:1px solid var(--ottone);padding:8px;background:var(--crema)"><img src="img/poster.webp" alt="Illustrazione in stile manifesto anni Trenta: un bancone con bicchieri di vino e cicchetti, nei toni crema e bordeaux" width="1376" height="768" loading="lazy"></div>
     <figcaption style="font-size:14px;font-style:italic;color:var(--inchiostro-tenue);text-align:center;margin-top:10px" data-i18n="man_poster">Il manifesto, letteralmente.</figcaption>
   </figure>
 
@@ -317,6 +361,18 @@
     <div class="voce">
       <h3 data-i18n="glo_t2">Cos'è un cicchetto?</h3>
       <p data-i18n="glo_p2">Un assaggio da banco, da mangiare in uno o due morsi accanto al bicchiere. Da noi parla milanese: nervetti, mondeghili, salame Milano, riso giallo croccante.</p>
+    </div>
+    <div class="voce">
+      <h3 data-i18n="glo_t3">Cos'è un bacaro?</h3>
+      <p data-i18n="glo_p3">L'osteria-enoteca veneziana dove si beve al banco e si mangiano cicchetti: a Venezia è un rito quotidiano. Il nostro lo parla in milanese.</p>
+    </div>
+    <div class="voce">
+      <h3 data-i18n="glo_t4">E il "giro"?</h3>
+      <p data-i18n="glo_p4">A Venezia non ci si ferma in un posto solo: si fa il giro — un'ombra e un cicchetto per locale, poi si cambia. Un bacaro è fatto per entrare, bere in piedi e ripartire.</p>
+    </div>
+    <div class="voce">
+      <h3 data-i18n="glo_t5">Nervetti, mondeghili?</h3>
+      <p data-i18n="glo_p5">Nervetti: cartilagini di vitello con cipolla e prezzemolo, freschi e croccanti. Mondeghili: le polpette milanesi di brasato. Roba di casa, servita piccola.</p>
     </div>
   </div>
 
@@ -404,10 +460,29 @@
   </div>
 
   <div class="listino-gruppo">
-    <h3>Da bere <small data-i18n="lis_s4">Lombardia e Piemonte, quasi solo</small></h3>
+    <h3>La carta dei vini <small data-i18n="lis_s4">Lombardia e Piemonte, quasi solo</small></h3>
+    <p class="vini-intro" data-i18n="lis_vini_intro">Quaranta etichette, quasi tutte di piccoli vignaioli. In mescita cambiano ogni settimana sulla lavagna — qui sotto le zone da cui peschiamo. Tutto anche in bottiglia.</p>
+
+    <p class="vini-cat">Bollicine</p>
+    <div class="piatto"><span class="nome">Franciacorta Extra Brut — Erbusco</span><span class="punti"></span><span class="prezzo">7</span></div>
+    <div class="piatto"><span class="nome">Oltrepò Pavese Metodo Classico, Pinot Nero</span><span class="punti"></span><span class="prezzo">6</span></div>
+
+    <p class="vini-cat">Bianchi</p>
+    <div class="piatto"><span class="nome">Timorasso Derthona — Colli Tortonesi</span><span class="punti"></span><span class="prezzo">6</span></div>
+    <div class="piatto"><span class="nome">Erbaluce di Caluso — Canavese</span><span class="punti"></span><span class="prezzo">5</span></div>
+    <div class="piatto"><span class="nome">Riesling dell'Oltrepò Pavese</span><span class="punti"></span><span class="prezzo">5</span></div>
+    <div class="piatto"><span class="nome">Lugana — sponda lombarda del Garda</span><span class="punti"></span><span class="prezzo">5</span></div>
+
+    <p class="vini-cat">Rossi</p>
+    <div class="piatto"><span class="nome">Bonarda dell'Oltrepò — Barbacarlo e dintorni</span><span class="punti"></span><span class="prezzo">5</span></div>
+    <div class="piatto"><span class="nome">Barbera d'Asti — piccolo produttore</span><span class="punti"></span><span class="prezzo">5</span></div>
+    <div class="piatto"><span class="nome">Nebbiolo delle Langhe</span><span class="punti"></span><span class="prezzo">7</span></div>
+    <div class="piatto"><span class="nome">Rosso di Valtellina — Nebbiolo di montagna</span><span class="punti"></span><span class="prezzo">6</span></div>
+    <div class="piatto"><span class="nome">Grignolino d'Asti — il chiaretto ribelle</span><span class="punti"></span><span class="prezzo">5</span></div>
+
+    <p class="vini-cat">Al banco</p>
     <div class="piatto"><span class="nome" data-i18n="lis_b1">L'ombra della casa</span><span class="punti"></span><span class="prezzo">3</span></div>
-    <div class="piatto"><span class="nome" data-i18n="lis_b2">Calici dalla lavagna</span><span class="punti"></span><span class="prezzo">5–8</span></div>
-    <div class="piatto"><span class="nome" data-i18n="lis_b3">Bottiglie — chiedi al banco</span><span class="punti"></span><span class="prezzo">da 22</span></div>
+    <div class="piatto"><span class="nome" data-i18n="lis_b3">Bottiglie da portare a casa</span><span class="punti"></span><span class="prezzo">da 22</span></div>
   </div>
 
   <p class="nota-listino segnaposto" data-i18n="lis_nota">Prezzi indicativi in attesa di apertura — ★ i piatti di casa.</p>
@@ -418,15 +493,17 @@
     <p class="occhiello" data-i18n="dov_occhiello">al banco si arriva a piedi</p>
     <h2 data-i18n="dov_titolo">Dove &amp; quando</h2>
   </div>
+  <p class="stato-orari-wrap"><span id="stato-orari" class="badge-orari" hidden></span></p>
   <figure style="margin:0 0 32px">
-    <div style="border:1px solid var(--ottone);padding:8px;background:var(--crema)"><img src="img/interno.webp" alt="L'interno di un bacaro milanese: bancone, bottiglie, lampade calde e lavagna" width="1440" height="810" loading="lazy"></div>
+    <div class="interno-cornice" style="border:1px solid var(--ottone);padding:8px;background:var(--crema)"><img src="img/interno.webp" alt="L'interno di un bacaro milanese: bancone, bottiglie, lampade calde e lavagna" width="1440" height="810" loading="lazy"></div>
   </figure>
   <div class="griglia">
     <div>
       <h3 data-i18n="dov_t1">L'indirizzo</h3>
-      <!-- DA SOSTITUIRE: indirizzo reale + link Google Maps -->
-      <p class="segnaposto">Via — , —<br>20129 Milano · Porta Venezia</p>
-      <p style="margin-top:10px"><a href="https://maps.google.com/?q=Porta+Venezia+Milano" data-i18n="dov_maps">Portami lì (Google Maps)</a></p>
+      <!-- DA SOSTITUIRE con l'indirizzo reale: qui c'è un civico d'esempio di Porta Venezia.
+           Cambia anche il link "Portami lì", l'src della mappa qui sotto e streetAddress nel JSON-LD in cima. -->
+      <p>Via Melzo 12<br>20129 Milano · Porta Venezia</p>
+      <p style="margin-top:10px"><a href="https://www.google.com/maps/search/?api=1&amp;query=Via+Melzo+12+Milano" target="_blank" rel="noopener" data-i18n="dov_maps">Portami lì (Google Maps)</a></p>
       <p style="margin-top:14px;font-size:16px;color:var(--inchiostro-tenue)" data-i18n="dov_mezzi">Ⓜ Porta Venezia (M1) · tram 9 e 33 · passante Porta Venezia</p>
     </div>
     <div>
@@ -440,6 +517,10 @@
       </table>
       <p style="margin-top:10px;font-size:16px;font-style:italic;color:var(--inchiostro-tenue)" data-i18n="dov_nota">il banco dei cicchetti apre con noi e chiude quando finiscono</p>
     </div>
+  </div>
+  <!-- DA SOSTITUIRE: quando c'è l'indirizzo vero, cambia "Via+Melzo+12,+Milano" qui sotto -->
+  <div class="mappa">
+    <iframe title="Mappa di Ombra a Milano, Porta Venezia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Via+Melzo+12,+Milano&amp;z=15&amp;output=embed"></iframe>
   </div>
   <div class="no-prenotazioni">
     <p><strong data-i18n="dov_np1">Niente prenotazioni.</strong> <span data-i18n="dov_np2">Si beve al banco, come una volta. Per gruppi, eventi o una bottiglia da portare a casa, scrivici su WhatsApp.</span></p>
@@ -483,7 +564,35 @@
   }, 5200);
 })();
 
-/* ---------- data della lavagna: sempre oggi ---------- */
+/* ---------- il cursore è una sorgente di luce: gli elementi proiettano ombra (solo desktop) ---------- */
+(function(){
+  var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!fine || reduce) return;
+  var root = document.documentElement;
+  root.classList.add('luce-attiva');
+  var tx = 0, ty = 6, cx = 0, cy = 6, raf = null;
+  var MAX = 16;
+  function tick(){
+    cx += (tx - cx) * 0.16;
+    cy += (ty - cy) * 0.16;
+    root.style.setProperty('--sx', cx.toFixed(2));
+    root.style.setProperty('--sy', cy.toFixed(2));
+    var mag = Math.min(1, Math.sqrt(cx*cx + cy*cy) / MAX);
+    root.style.setProperty('--sblur', (22 + mag*13).toFixed(1));
+    if(Math.abs(tx - cx) > 0.08 || Math.abs(ty - cy) > 0.08){ raf = requestAnimationFrame(tick); }
+    else { raf = null; }
+  }
+  window.addEventListener('mousemove', function(e){
+    var w = window.innerWidth, h = window.innerHeight;
+    // vettore dal cursore verso il centro = direzione in cui cade l'ombra
+    tx = ((w/2 - e.clientX) / (w/2)) * MAX;
+    ty = ((h/2 - e.clientY) / (h/2)) * MAX + 4; // +4: leggera luce d'ambiente dall'alto
+    if(!raf) raf = requestAnimationFrame(tick);
+  }, {passive:true});
+})();
+
+/* ---------- data della lavagna + stato aperto/chiuso ---------- */
 (function(){
   var mesi = {
     it:['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'],
@@ -504,6 +613,51 @@
     } else {
       var num = (lingua === 'fr' && d.getDate() === 1) ? '1er' : d.getDate();
       el.textContent = giorni[lingua][d.getDay()] + ' ' + num + ' ' + mesi[lingua][d.getMonth()];
+    }
+  };
+
+  /* Orari INVENTATI (segnaposto), allineati alla tabella "Gli orari".
+     getDay: 0=dom … 6=sab. Fasce in ore decimali (17.5 = 17.30). DA SOSTITUIRE con i veri. */
+  var orari = {2:[[17.5,23]], 3:[[17.5,23]], 4:[[17.5,23]], 5:[[17.5,23]], 6:[[12,23.5]], 0:[[12,21]], 1:[]};
+  var testi = {
+    it:{ap:'Aperto ora', ch:'chiude alle', cl:'Chiuso', op:'apre', at:'alle', dom:'domani'},
+    en:{ap:'Open now', ch:'closes at', cl:'Closed', op:'opens', at:'at', dom:'tomorrow'},
+    fr:{ap:'Ouvert', ch:'ferme à', cl:'Fermé', op:'ouvre', at:'à', dom:'demain'}
+  };
+  function ora(h, lang){
+    var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+    if(lang === 'fr') return mm ? (hh + 'h' + (mm<10?'0':'') + mm) : (hh + 'h');
+    var sep = (lang === 'en') ? ':' : '.';
+    return hh + sep + (mm<10?'0':'') + mm;
+  }
+  window.aggiornaStato = function(lingua){
+    var el = document.getElementById('stato-orari');
+    if(!el) return;
+    var t = testi[lingua] || testi.it;
+    var d = new Date(), day = d.getDay(), h = d.getHours() + d.getMinutes()/60;
+    var oggi = orari[day] || [], apertoFino = null;
+    for(var i=0;i<oggi.length;i++){ if(h >= oggi[i][0] && h < oggi[i][1]){ apertoFino = oggi[i][1]; break; } }
+    el.hidden = false;
+    if(apertoFino != null){
+      el.className = 'badge-orari aperto';
+      el.textContent = t.ap + ' · ' + t.ch + ' ' + ora(apertoFino, lingua);
+      return;
+    }
+    el.className = 'badge-orari chiuso';
+    var found = null;
+    for(var dd=0; dd<8; dd++){
+      var g = (day + dd) % 7, slots = orari[g] || [];
+      for(var j=0;j<slots.length;j++){
+        if(dd === 0 && slots[j][0] <= h) continue;
+        found = {g:g, open:slots[j][0], inDays:dd}; break;
+      }
+      if(found) break;
+    }
+    if(found){
+      var quando = found.inDays === 0 ? '' : (found.inDays === 1 ? t.dom : giorni[lingua][found.g]);
+      el.textContent = t.cl + ' · ' + t.op + (quando ? (' ' + quando) : '') + ' ' + t.at + ' ' + ora(found.open, lingua);
+    } else {
+      el.textContent = t.cl;
     }
   };
 })();
@@ -528,6 +682,12 @@ var i18n = {
     glo_p1:'A small glass of wine, served at the counter for an honest price. In Venice they say wine sellers followed the shadow — the ombra — of the bell tower to keep their wine cool. In French the word is nearly the same: ombre.',
     glo_t2:'What is a cicchetto?',
     glo_p2:'A little bite from the counter, gone in a mouthful or two beside your glass. Here it speaks Milanese: nervetti, mondeghili, Milano salami, crispy saffron rice.',
+    glo_t3:'What is a bacaro?',
+    glo_p3:'The Venetian tavern-cum-wine-bar where you drink at the counter and eat cicchetti — an everyday ritual in Venice. Ours speaks it in Milanese.',
+    glo_t4:'And the “giro”?',
+    glo_p4:'In Venice you don’t settle in one spot: you do the giro — one ombra and one cicchetto per bar, then move on. A bacaro is made to step in, drink standing, and go.',
+    glo_t5:'Nervetti, mondeghili?',
+    glo_p5:'Nervetti: veal cartilage with onion and parsley, cool and crunchy. Mondeghili: Milanese meatballs from braised beef. Home cooking, served small.',
     num_1:'13 cicchetti', num_2:'4 desserts', num_3:'40 wines', num_4:'1 counter',
     lav_occhiello:'it changes every day', lav_titolo:'Today’s chalkboard', lav_oggi:'Today,',
     lav_gr1:'From the counter', lav_gr2:'This week’s ombre',
@@ -536,7 +696,8 @@ var i18n = {
     lis_s1:'from the counter, €3–6', lis_s2:'for those who want more, €9–16', lis_s3:'small, like everything here', lis_s4:'Lombardy and Piedmont, little else',
     lis_d1:'crispy saffron rice, shredded braised ossobuco, gremolada and marrow — the house dish',
     lis_d2:'Milanese meatballs done properly: braised beef, potato cream, a touch of mostarda',
-    lis_b1:'The house ombra', lis_b2:'Glasses from the chalkboard', lis_b3:'Bottles — ask at the counter',
+    lis_vini_intro:'Forty labels, nearly all from small growers. By the glass they change every week on the chalkboard — below are the areas we draw from. All available by the bottle too.',
+    lis_b1:'The house ombra', lis_b3:'Bottles to take home',
     lis_nota:'Provisional prices until we open — ★ marks a house dish.',
     dov_occhiello:'a counter is somewhere you arrive on foot', dov_titolo:'Where & when',
     dov_t1:'The address', dov_maps:'Take me there (Google Maps)',
@@ -567,6 +728,12 @@ var i18n = {
     glo_p1:'Un petit verre de vin, servi au comptoir à prix honnête. À Venise, on raconte que les marchands de vin suivaient l’ombre du campanile pour garder le vin au frais. En français, le mot est presque le même : ombre.',
     glo_t2:'Qu’est-ce qu’un cicchetto ?',
     glo_p2:'Une bouchée de comptoir, à manger en une ou deux fois à côté du verre. Chez nous, elle parle milanais : nervetti, mondeghili, salame Milano, riz au safran croustillant.',
+    glo_t3:'Qu’est-ce qu’un bacaro ?',
+    glo_p3:'La taverne-cave vénitienne où l’on boit au comptoir et mange des cicchetti — un rituel quotidien à Venise. Le nôtre le parle en milanais.',
+    glo_t4:'Et le « giro » ?',
+    glo_p4:'À Venise, on ne s’installe pas : on fait le giro — une ombra et un cicchetto par bar, puis on change. Un bacaro est fait pour entrer, boire debout et repartir.',
+    glo_t5:'Nervetti, mondeghili ?',
+    glo_p5:'Nervetti : cartilage de veau à l’oignon et au persil, frais et croquant. Mondeghili : les boulettes milanaises de bœuf braisé. De la cuisine de maison, servie petite.',
     num_1:'13 cicchetti', num_2:'4 desserts', num_3:'40 références', num_4:'1 comptoir',
     lav_occhiello:'ça change tous les jours', lav_titolo:'L’ardoise du jour', lav_oggi:'Aujourd’hui,',
     lav_gr1:'Au comptoir', lav_gr2:'Les ombres de la semaine',
@@ -575,7 +742,8 @@ var i18n = {
     lis_s1:'au comptoir, 3–6 €', lis_s2:'pour monter d’un cran, 9–16 €', lis_s3:'petits, comme tout ici', lis_s4:'Lombardie et Piémont, presque uniquement',
     lis_d1:'riz au safran croustillant, ossobuco braisé effiloché, gremolada et moelle — le plat de la maison',
     lis_d2:'les boulettes milanaises faites comme il faut : braisé de bœuf, crème de pommes de terre, une pointe de mostarda',
-    lis_b1:'L’ombra de la maison', lis_b2:'Verres à l’ardoise', lis_b3:'Bouteilles — demandez au comptoir',
+    lis_vini_intro:'Quarante références, presque toutes de petits vignerons. Au verre, elles changent chaque semaine sur l’ardoise — voici les zones où nous puisons. Tout aussi en bouteille.',
+    lis_b1:'L’ombra de la maison', lis_b3:'Bouteilles à emporter',
     lis_nota:'Prix indicatifs avant ouverture — ★ les plats de la maison.',
     dov_occhiello:'un comptoir, ça se rejoint à pied', dov_titolo:'Où & quand',
     dov_t1:'L’adresse', dov_maps:'M’y emmener (Google Maps)',
@@ -611,8 +779,13 @@ var i18n = {
     var gruppoLingue = document.querySelector('.lingue');
     if(gruppoLingue) gruppoLingue.setAttribute('aria-label', {it:'Lingua', en:'Language', fr:'Langue'}[lingua] || 'Lingua');
     window.aggiornaData(lingua);
+    window.aggiornaStato(lingua);
     try { localStorage.setItem('ombra-lingua', lingua); } catch(e){}
   }
+  setInterval(function(){
+    var l = document.documentElement.lang || 'it';
+    window.aggiornaData(l); window.aggiornaStato(l);
+  }, 60000);
 
   document.querySelectorAll('.lingue button').forEach(function(b){
     b.addEventListener('click', function(){ applica(b.getAttribute('data-lingua')); });
