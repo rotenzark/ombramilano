@@ -252,8 +252,8 @@
      Il cursore è una sorgente di luce: --sx/--sy sono l'offset dell'ombra,
      aggiornati via JS. Base: ombra statica morbida (mobile, reduced-motion). */
   .hero-foto .cornice,.manifesto-figura,.glossario .voce,.galleria figure,
-  .no-prenotazioni,.interno-cornice,.mappa{box-shadow:0 3px 12px rgba(46,36,25,.09)}
-  #lavagna .quadro{box-shadow:inset 0 0 60px rgba(0,0,0,.25),0 8px 24px rgba(46,36,25,.16)}
+  .no-prenotazioni,.interno-cornice,.mappa{box-shadow:0 6px 22px rgba(46,36,25,.10)}
+  #lavagna .quadro{box-shadow:inset 0 0 60px rgba(0,0,0,.25),0 12px 34px rgba(46,36,25,.18)}
 
   html.luce-attiva .hero-foto .cornice,
   html.luce-attiva .manifesto-figura,
@@ -265,20 +265,20 @@
   html.luce-attiva .cta.pieno,
   html.luce-attiva .cta.vuoto{
     box-shadow:
-      calc(var(--sx,0) * 1px) calc(var(--sy,0) * 1px) calc(var(--sblur,30) * 1px) rgba(46,36,25,.40),
-      calc(var(--sx,0) * .45px) calc(var(--sy,0) * .45px) calc(var(--sblur,30) * .5px) rgba(46,36,25,.22);
+      calc(var(--sx,0) * 1px) calc(var(--sy,0) * 1px) calc(var(--sblur,24) * 1px) rgba(46,36,25,.24),
+      calc(var(--sx,0) * .4px) calc(var(--sy,0) * .4px) calc(var(--sblur,24) * .45px) rgba(46,36,25,.13);
   }
   html.luce-attiva #lavagna .quadro{
     box-shadow:
       inset 0 0 60px rgba(0,0,0,.25),
-      calc(var(--sx,0) * 1.6px) calc(var(--sy,0) * 1.6px) calc(var(--sblur,30) * 1.4px) rgba(46,36,25,.46);
+      calc(var(--sx,0) * 1.5px) calc(var(--sy,0) * 1.5px) calc(var(--sblur,24) * 1.35px) rgba(46,36,25,.32);
   }
   html.luce-attiva .cta{transition:none}
-  /* anche l'insegna OMBRA proietta la sua ombra dal cursore */
+  /* l'insegna OMBRA resta la più espressiva: proietta la sua ombra lunga dal cursore */
   html.luce-attiva .hero h1{
     text-shadow:
-      calc(var(--sx,0) * .55px) calc(var(--sy,0) * .55px) 0 rgba(176,141,87,.22),
-      calc(var(--sx,0) * 1.15px) calc(var(--sy,0) * 1.15px) calc(var(--sblur,30) * 1px) rgba(46,36,25,.26);
+      calc(var(--sx,0) * .7px) calc(var(--sy,0) * .7px) 0 rgba(176,141,87,.22),
+      calc(var(--sx,0) * 1.4px) calc(var(--sy,0) * 1.4px) calc(var(--sblur,24) * 1px) rgba(46,36,25,.26);
   }
 
   footer{
@@ -298,9 +298,15 @@
     .hero h1 #ultima{transition:none}
   }
   @media (max-width:600px){
-    html{scroll-padding-top:150px}
+    html{scroll-padding-top:120px}
     section{padding:48px 16px}
     .piatto-desc{max-width:100%}
+    /* header a due righe: insegna + lingue sopra, menu centrato sotto */
+    nav{padding:12px 18px 10px;row-gap:6px}
+    nav .marchio{order:1;font-size:22px}
+    nav .lingue{order:2}
+    nav .voci{order:3;flex-basis:100%;justify-content:center;gap:2px 22px;margin-top:6px}
+    nav .voci a{font-size:14px;padding:8px 2px}
   }
 </style>
 </head>
@@ -570,32 +576,49 @@
   }, 5200);
 })();
 
-/* ---------- il cursore è una sorgente di luce: gli elementi proiettano ombra (solo desktop) ---------- */
+/* ---------- luce e ombre: il cursore su desktop, un'orbita lenta e automatica su mobile ---------- */
 (function(){
-  var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!fine || reduce) return;
+  if(reduce) return;
+  var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   var root = document.documentElement;
   root.classList.add('luce-attiva');
-  var tx = 0, ty = 10, cx = 0, cy = 10, raf = null;
-  var MAX = 30;
-  function tick(){
-    cx += (tx - cx) * 0.2;
-    cy += (ty - cy) * 0.2;
+  var MAX = 16, cx = 0, cy = 8;
+  function paint(){
     root.style.setProperty('--sx', cx.toFixed(2));
     root.style.setProperty('--sy', cy.toFixed(2));
     var mag = Math.min(1, Math.sqrt(cx*cx + cy*cy) / MAX);
-    root.style.setProperty('--sblur', (18 + mag*22).toFixed(1));
-    if(Math.abs(tx - cx) > 0.08 || Math.abs(ty - cy) > 0.08){ raf = requestAnimationFrame(tick); }
-    else { raf = null; }
+    root.style.setProperty('--sblur', (20 + mag*13).toFixed(1));
   }
-  window.addEventListener('mousemove', function(e){
-    var w = window.innerWidth, h = window.innerHeight;
-    // vettore dal cursore verso il centro = direzione in cui cade l'ombra
-    tx = ((w/2 - e.clientX) / (w/2)) * MAX;
-    ty = ((h/2 - e.clientY) / (h/2)) * MAX + 6; // +6: leggera luce d'ambiente dall'alto
-    if(!raf) raf = requestAnimationFrame(tick);
-  }, {passive:true});
+  paint();
+
+  if(fine){
+    // desktop: il cursore è la sorgente di luce
+    var tx = 0, ty = 8, raf = null;
+    function tick(){
+      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2; paint();
+      if(Math.abs(tx - cx) > 0.08 || Math.abs(ty - cy) > 0.08){ raf = requestAnimationFrame(tick); } else { raf = null; }
+    }
+    window.addEventListener('mousemove', function(e){
+      var w = window.innerWidth, h = window.innerHeight;
+      // vettore dal cursore verso il centro = direzione in cui cade l'ombra
+      tx = ((w/2 - e.clientX) / (w/2)) * MAX;
+      ty = ((h/2 - e.clientY) / (h/2)) * MAX + 4;
+      if(!raf) raf = requestAnimationFrame(tick);
+    }, {passive:true});
+  } else {
+    // mobile/touch: la luce orbita lentamente da sola (~11s a giro), a ~30fps per non pesare sulla batteria
+    var R = 13, periodo = 11000, last = 0;
+    function orbita(now){
+      requestAnimationFrame(orbita);
+      if(now - last < 33) return; last = now;
+      var a = (now % periodo) / periodo * Math.PI * 2;
+      cx = Math.cos(a) * R;
+      cy = Math.sin(a) * R * 0.5 + 7; // ellisse schiacciata + luce d'ambiente dall'alto
+      paint();
+    }
+    requestAnimationFrame(orbita);
+  }
 })();
 
 /* ---------- data della lavagna + stato aperto/chiuso ---------- */
