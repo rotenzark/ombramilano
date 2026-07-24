@@ -274,6 +274,12 @@
       calc(var(--sx,0) * 1.6px) calc(var(--sy,0) * 1.6px) calc(var(--sblur,30) * 1.4px) rgba(46,36,25,.46);
   }
   html.luce-attiva .cta{transition:none}
+  /* anche l'insegna OMBRA proietta la sua ombra dal cursore */
+  html.luce-attiva .hero h1{
+    text-shadow:
+      calc(var(--sx,0) * .55px) calc(var(--sy,0) * .55px) 0 rgba(176,141,87,.22),
+      calc(var(--sx,0) * 1.15px) calc(var(--sy,0) * 1.15px) calc(var(--sblur,30) * 1px) rgba(46,36,25,.26);
+  }
 
   footer{
     background:var(--bordeaux);color:var(--crema-scura);
