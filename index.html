@@ -252,8 +252,8 @@
      Il cursore è una sorgente di luce: --sx/--sy sono l'offset dell'ombra,
      aggiornati via JS. Base: ombra statica morbida (mobile, reduced-motion). */
   .hero-foto .cornice,.manifesto-figura,.glossario .voce,.galleria figure,
-  .no-prenotazioni,.interno-cornice,.mappa{box-shadow:0 6px 22px rgba(46,36,25,.10)}
-  #lavagna .quadro{box-shadow:inset 0 0 60px rgba(0,0,0,.25),0 12px 34px rgba(46,36,25,.18)}
+  .no-prenotazioni,.interno-cornice,.mappa{box-shadow:0 3px 12px rgba(46,36,25,.09)}
+  #lavagna .quadro{box-shadow:inset 0 0 60px rgba(0,0,0,.25),0 8px 24px rgba(46,36,25,.16)}
 
   html.luce-attiva .hero-foto .cornice,
   html.luce-attiva .manifesto-figura,
@@ -265,13 +265,13 @@
   html.luce-attiva .cta.pieno,
   html.luce-attiva .cta.vuoto{
     box-shadow:
-      calc(var(--sx,0) * 1px) calc(var(--sy,0) * 1px) calc(var(--sblur,26) * 1px) rgba(46,36,25,.24),
-      calc(var(--sx,0) * .38px) calc(var(--sy,0) * .38px) calc(var(--sblur,26) * .42px) rgba(46,36,25,.13);
+      calc(var(--sx,0) * 1px) calc(var(--sy,0) * 1px) calc(var(--sblur,30) * 1px) rgba(46,36,25,.40),
+      calc(var(--sx,0) * .45px) calc(var(--sy,0) * .45px) calc(var(--sblur,30) * .5px) rgba(46,36,25,.22);
   }
   html.luce-attiva #lavagna .quadro{
     box-shadow:
       inset 0 0 60px rgba(0,0,0,.25),
-      calc(var(--sx,0) * 1.5px) calc(var(--sy,0) * 1.5px) calc(var(--sblur,26) * 1.35px) rgba(46,36,25,.32);
+      calc(var(--sx,0) * 1.6px) calc(var(--sy,0) * 1.6px) calc(var(--sblur,30) * 1.4px) rgba(46,36,25,.46);
   }
   html.luce-attiva .cta{transition:none}
 
@@ -571,15 +571,15 @@
   if(!fine || reduce) return;
   var root = document.documentElement;
   root.classList.add('luce-attiva');
-  var tx = 0, ty = 6, cx = 0, cy = 6, raf = null;
-  var MAX = 16;
+  var tx = 0, ty = 10, cx = 0, cy = 10, raf = null;
+  var MAX = 30;
   function tick(){
-    cx += (tx - cx) * 0.16;
-    cy += (ty - cy) * 0.16;
+    cx += (tx - cx) * 0.2;
+    cy += (ty - cy) * 0.2;
     root.style.setProperty('--sx', cx.toFixed(2));
     root.style.setProperty('--sy', cy.toFixed(2));
     var mag = Math.min(1, Math.sqrt(cx*cx + cy*cy) / MAX);
-    root.style.setProperty('--sblur', (22 + mag*13).toFixed(1));
+    root.style.setProperty('--sblur', (18 + mag*22).toFixed(1));
     if(Math.abs(tx - cx) > 0.08 || Math.abs(ty - cy) > 0.08){ raf = requestAnimationFrame(tick); }
     else { raf = null; }
   }
@@ -587,7 +587,7 @@
     var w = window.innerWidth, h = window.innerHeight;
     // vettore dal cursore verso il centro = direzione in cui cade l'ombra
     tx = ((w/2 - e.clientX) / (w/2)) * MAX;
-    ty = ((h/2 - e.clientY) / (h/2)) * MAX + 4; // +4: leggera luce d'ambiente dall'alto
+    ty = ((h/2 - e.clientY) / (h/2)) * MAX + 6; // +6: leggera luce d'ambiente dall'alto
     if(!raf) raf = requestAnimationFrame(tick);
   }, {passive:true});
 })();
